@@ -8,10 +8,10 @@ import {
     TouchableOpacity,
     StatusBar,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 import uuid from 'react-native-uuid';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import database from '@react-native-firebase/database';
 import Toast from 'react-native-simple-toast';
 
@@ -50,8 +50,16 @@ const SignInScreen = ({ navigation }) => {
                     Toast.show("Invalid Password!");
                     return false;
                 }
+                else{
+                    await AsyncStorage.setItem('information', JSON.stringify(userData));
+                    navigation.navigate('ListChat',{userData});
+                }
+    
+              
             })
-
+          
+      
+      
     }
     return (
         <View style={styles.container}>
@@ -65,7 +73,7 @@ const SignInScreen = ({ navigation }) => {
                 style={[
                     styles.footer,
                 ]}>
-                <Text style={[styles.text_footer,]}>Email :</Text>
+                <Text style={[styles.text_footer,]}>Email </Text>
                 <View style={styles.action}>
                     <FontAwesome
                         name="user"
@@ -84,7 +92,7 @@ const SignInScreen = ({ navigation }) => {
                 </View>
 
                 <Text style={[styles.text_footer]}>
-                    Password :
+                    Password 
                 </Text>
                 <View style={styles.action}>
                     <FontAwesome
